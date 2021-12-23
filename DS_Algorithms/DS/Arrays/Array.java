@@ -1,41 +1,34 @@
 
 
 public class Array {
-    private int length;
     public int[] list;
-    private int lastIndex = -1;
+    private int lastIndex;
 
 
     public Array(int length){
-        this.length = length;
         this.list = new int[length];
     }
 
     public void getLength(){
-        System.out.println(this.length);
+        System.out.println(list.length);
     }
 
     public boolean isEmpty(){
-        if (length == 0){
+        if (lastIndex == 0){
             return true;
         }
         return false;
     }
 
     public void insert(int element){
-        if (lastIndex == length - 1){
-            int[] temp = new int[length + 1];
+        if (lastIndex == list.length){
+            int[] temp = new int[lastIndex * 2];
             for (int i = 0; i < list.length; i++ ){
                 temp[i] = list[i];
             }
-            length += 1;
-            list = new int[length];
-            for (int i = 0; i < temp.length; i++){
-                list[i] = temp[i];
-            }   
+            list = temp;   
         }
-        lastIndex += 1;
-        list[lastIndex] = element;
+        list[lastIndex++] = element;
         
     }
 
@@ -47,22 +40,25 @@ public class Array {
         for (int i = index; i < list.length - 1; i++){
             list[i] = list[i + 1];
         }
-        length = list.length - 1;
-        lastIndex = length - 1;
-        int[] temp = new int[length];
-        for (int i = 0; i < length; i++){
-            temp[i] = list[i];
-        }
-        list = new int[length];
-        for (int i = 0; i < length; i++){
-            list[i] = temp[i];
-        }
+        lastIndex--;
+        // spacewise implementation
+        //int[] temp = new int[lastIndex];
+        //for (int i = 0; i < lastIndex; i++){
+        //    temp[i] = list[i];
+        //}
+        //list = temp;
+        //}
     }
 
     public void print(){
-        for (int i = 0; i < list.length; i++){
-            System.out.println(list[i]);
+        System.out.print("[");
+        for (int i = 0; i < lastIndex; i++){
+            if (i != 0){
+                System.out.print(", ");
+            }
+            System.out.print(list[i]);
         }
+        System.out.println("]");
     }
 
     public int indexOf(int element){
@@ -73,6 +69,27 @@ public class Array {
             }
         }
         return -1;
+    }
+
+    public int max(){
+        int largest = -1;
+        for ( int i = 0; i < list.length; i++ ){
+            if (largest < list[i]){
+                largest = list[i];
+            }   
+        }
+        return largest;
+
+    }
+
+    public void reverse(){
+        int[] temp = new int[list.length];
+        int j = 0;
+        for (int i = lastIndex -1; i >= 0; i-- ){
+            temp[j++] = list[i];
+        }
+        list = temp;
+        
     }
 
 }

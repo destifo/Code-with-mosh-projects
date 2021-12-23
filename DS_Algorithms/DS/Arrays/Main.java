@@ -8,10 +8,11 @@ public class Main{
         numbers.insert(12);
         numbers.insert(13);
         numbers.insert(14);
-        System.out.println(numbers.indexOf(14));
-        numbers.removeAt(1);
+        //System.out.println(numbers.indexOf(14));
+        //numbers.removeAt(1);
+        //numbers.print();
+        numbers.reverse();
         numbers.print();
-
 
     }
     
