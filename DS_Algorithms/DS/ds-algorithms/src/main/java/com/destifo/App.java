@@ -1,5 +1,7 @@
 package com.destifo;
 
+import java.util.Arrays;
+
 /**
  * Hello world!
  *
@@ -29,7 +31,11 @@ public class App
         list.deleteLast();
         System.out.println(list.indexOf(20));
         System.out.println(list.indexOf(90));
+        System.out.println(list.contains(20));
+        System.out.println(list.size());
         list.print();
+        var array = list.toArray();
+        System.out.println(Arrays.toString(array));
 
     }
 }

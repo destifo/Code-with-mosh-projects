@@ -3,8 +3,22 @@ package com.destifo;
 public class LinkedList {
     private Node head;
     private Node tail;
+    private int length;
+
+    public int firstPrint(){
+        return length;
+    }
 
     public LinkedList(){};
+
+    private boolean isEmpty(){
+        if (head == null) return true;
+        return false;
+    }
+
+    public int size(){
+        return length;
+    }
 
     public void print(){
         Node temp = head;
@@ -16,53 +30,55 @@ public class LinkedList {
 
     public void addFirst(int value){
         Node node = new Node(value);
-        if (head == null & head == tail){
+        if (isEmpty()){
             tail = node;
             head = node;
-            return;
+        }else{
+            node.setNext(head);
+            head = node;   
         }
-        node.setNext(head);
-        head = node;   
+        length++;
+        
     }
 
     public void addLast(int value){
         Node node = new Node(value);
-        if (head == null & head == tail){
+        if (isEmpty()){
             head = node;
             tail = node;
-            return;
+        }else{
+            tail.setNext(node);
+            tail = node;
         }
+        length++;
         //if (head == tail){
         //    tail = node;
         //    head.setNext(node);
         //    return;
         //}
-        tail.setNext(node);
-        tail = node;
+        
     }
 
     public void deleteLast(){
-        if (head == null){
-            return;
-        }
+        if (isEmpty()) return;
 
         if (head == tail){
             head = null;
             tail = null;
-            return;
-        }
-
-        Node temp = head.getNext();
-        Node prev = head;
-        while (true){
-            if (temp.getNext() == null){
-                tail = prev;
-                prev.setNext(null);
-                return;
+        }else{
+            Node temp = head.getNext();
+            Node prev = head;
+            while (true){
+                if (temp.getNext() == null){
+                    tail = prev;
+                    prev.setNext(null);
+                    break;
+                }
+                temp = temp.getNext();
+                prev = prev.getNext();
             }
-            temp = temp.getNext();
-            prev = prev.getNext();
         }
+        length--;
     }
     
     public void deleteFirst(){
@@ -73,12 +89,12 @@ public class LinkedList {
         if (head == tail){
             head = null;
             tail = null;
-            return;
+        }else{
+            Node next = head.getNext();
+            head.setNext(null);
+            head = next;
         }
-        
-        Node next = head.getNext();
-        head.setNext(null);
-        head = next;
+        length--;
     }
 
     public int indexOf(int value){
@@ -91,11 +107,26 @@ public class LinkedList {
             if (temp.getNext() == null){
                 return -1;
             }
-
-            
-
             count++;
             temp = temp.getNext();
         }
+    }
+
+    public boolean contains(int value){
+        if (indexOf(value) == -1) 
+            return false;
+        return true;
+    }
+
+    public int[] toArray(){
+        Node temp = head;
+        int[] array = new int[length]; 
+        int index = 0;
+        while (temp != null){
+            array[index] = temp.getValue();
+            index++;
+            temp = temp.getNext();
+        }
+        return array;
     }
 }
