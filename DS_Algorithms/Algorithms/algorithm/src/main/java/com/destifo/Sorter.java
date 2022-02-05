@@ -46,4 +46,74 @@ public class Sorter{
         }
     }
 
+
+    public void selectionSort(int[] array){
+        for (int i = 0; i < array.length; i++){
+            int smallestNumber = array[i];
+            int smallestNumberIndex = i;
+            for (int j = array.length - 1; j >= i; j--){
+                if (array[j] < smallestNumber){
+                    smallestNumber = array[j];
+                    smallestNumberIndex = j;
+                }
+            }
+            array[smallestNumberIndex] = array[i];
+            array[i] = smallestNumber;
+        }
+    }
+
+    public void modifiedSelectionSort(int[] array){
+        for (int i = 0; i < array.length; i++){
+            int minIndex = findMinIndex(array, i);
+            swap(array, i, minIndex);
+        }
+    }
+
+    public int findMinIndex(int[] array,int i){
+        int minIndex = i;
+        for (int j = array.length - 1; j >= i; j--)
+            if (array[j] < array[minIndex])
+                minIndex = j;
+        return minIndex;
+    }
+
+    public void mergeSort(int[] array){
+
+        if (array.length  < 2)
+            return;
+
+        int middleIndex = array.length/2;
+
+        int[] left = new int[middleIndex];
+        for (int i = 0; i < middleIndex; i++)
+            left[i] = array[i];
+        
+        int rightLength = array.length - middleIndex;
+        int[] right = new int[rightLength];
+        for (int i = 0; i < rightLength; i++){
+            right[i] = array[i + middleIndex];
+        }
+
+        mergeSort(left);
+        mergeSort(right);
+
+        merge(left, right, array);
+
+    }
+
+    private void merge(int[] firstArray, int[] secondArray, int[] combinedArray){
+        int i = 0, j = 0, k = 0;
+
+        while (i < firstArray.length && j < secondArray.length){
+            if (firstArray[i] <= secondArray[j])
+                combinedArray[k++] = firstArray[i++];
+            else
+                combinedArray[k++] = secondArray[j++];
+        }
+        while (i < firstArray.length)
+            combinedArray[k++] = firstArray[i++];
+        while (j < secondArray.length)
+            combinedArray[k++] = secondArray[j++];
+    }
+
 }

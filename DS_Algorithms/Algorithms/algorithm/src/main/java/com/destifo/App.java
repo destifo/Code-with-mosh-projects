@@ -12,7 +12,11 @@ public class App
     {
         Sorter sorter = new Sorter();
         int[] num = {5, 3, 1, 2, 9, 0};
-        sorter.insertionSort(num);
+        //sorter.bubbleSorter(num);
+        //sorter.selectionSort(num);
+        //sorter.insertionSort(num);
+        //sorter.modifiedSelectionSort(num);
+        sorter.mergeSort(num);
         System.out.println(Arrays.toString(num));
         
     }
