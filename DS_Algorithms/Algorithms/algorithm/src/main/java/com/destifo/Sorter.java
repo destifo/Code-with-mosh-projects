@@ -116,4 +116,28 @@ public class Sorter{
             combinedArray[k++] = secondArray[j++];
     }
 
+    public void quickSort(int[] array){
+        quickSort(array, 0, array.length - 1);
+    }
+
+
+    private void quickSort(int[] array, int startIndex, int endIndex){
+        if (startIndex >= endIndex)
+            return;
+        int boundary = partition(array, startIndex, endIndex);
+        quickSort(array, startIndex, boundary -1);
+        quickSort(array, boundary + 1, endIndex);
+    }
+
+
+    private int partition(int[] array, int start, int end){
+        int pivot = (start + end)/2;
+        int boundary = start - 1;
+        for (int i = start; i <= end; i++)
+            if (array[i] < array[pivot])
+                swap(array, ++boundary, i);
+        swap(array, ++boundary, pivot);
+        return boundary;
+    }
+
 }
