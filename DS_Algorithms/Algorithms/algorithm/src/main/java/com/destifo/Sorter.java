@@ -1,5 +1,10 @@
 package com.destifo;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 public class Sorter{
     public void bubbleSorter(int[] array){
         //the next bigger num bubbles up to the last every turn
@@ -155,8 +160,29 @@ public class Sorter{
         }
     }
 
-    public void bucketSort(int[] array){
+    public void bucketSort(int[] array, int bucketNumber){
+
+        int i = 0;
+
+        for (List<Integer> bucket: createBuckets(array, bucketNumber)){
+            Collections.sort(bucket);
+            for (int item:bucket)
+                array[i++] = item;
+        }
         
+    }
+
+    private List<List<Integer>> createBuckets(int[] array, int bucketNumber){
+        List<List<Integer>> buckets = new ArrayList<>();
+        for (int i = 0; i <= bucketNumber; i++)
+            buckets.add(new ArrayList<>());
+        
+        for (int item: array)
+            buckets.get(item/bucketNumber).add(item);
+        
+        return buckets;
+        
+
     }
 
 }
