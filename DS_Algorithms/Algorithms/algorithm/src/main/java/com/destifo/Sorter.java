@@ -140,4 +140,23 @@ public class Sorter{
         return boundary;
     }
 
+
+    public void countingSort(int[] array, int max){
+        int[] count = new int[max++];
+        for (int num : array){
+            count[num]++;
+        }
+
+        int k = 0;
+        for (int i = 0; i < count.length; i++){
+            for (int j = 0; j < count[i]; j++){
+                array[k] = i;
+            }
+        }
+    }
+
+    public void bucketSort(int[] array){
+        
+    }
+
 }
