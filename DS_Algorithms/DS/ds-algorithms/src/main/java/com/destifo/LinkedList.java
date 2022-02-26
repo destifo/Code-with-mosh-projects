@@ -129,4 +129,51 @@ public class LinkedList {
         }
         return array;
     }
+
+    public void reverse(){
+        if (isEmpty()) return;
+
+        Node temp, prev, next;
+        temp = head.getNext();
+        prev = head;
+        while (temp != null){
+            next = temp.getNext();
+            temp.setNext(prev);
+            prev = temp;
+            temp = next;
+        }
+        
+        tail = head;
+        tail.setNext(null);
+        head = prev;
+    }
+
+    public int getKthFromTheEnd(int k){
+        if (isEmpty()) throw new IllegalStateException();
+
+        if (k < 0) throw new IllegalArgumentException();
+
+        Node first, second;
+        first = head;
+        second = head;
+        int distance = 0;
+
+        while (true){
+            if (distance == k - 1)
+                break;
+            if (second == null)
+                throw new IllegalArgumentException();
+            second = second.getNext();
+            distance ++;
+
+        }
+        while (true){
+            if (second.getNext() == null)
+                return first.getValue();
+            first = first.getNext();
+            second = second.getNext();
+        }
+
+    }
+
 }

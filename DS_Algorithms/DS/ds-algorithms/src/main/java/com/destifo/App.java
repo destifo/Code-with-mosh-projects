@@ -24,18 +24,22 @@ public class App
         //numbers.print();
         LinkedList list = new LinkedList();
         list.addFirst(10);
+        //list.print();
         list.addFirst(20);
         list.addLast(40);
         list.addLast(90);
-        list.addFirst(100);
-        list.deleteLast();
-        System.out.println(list.indexOf(20));
-        System.out.println(list.indexOf(90));
-        System.out.println(list.contains(20));
-        System.out.println(list.size());
-        list.print();
+        //list.addFirst(100);
+        //list.deleteLast();
+        //list.print();
+        //list.reverse();
         var array = list.toArray();
         System.out.println(Arrays.toString(array));
+        System.out.println(list.getKthFromTheEnd(2));
 
+        StackCheats stackCheats = new StackCheats();
+
+        System.out.println(stackCheats.reverseString("sweat"));
+
+        System.out.println(stackCheats.isBalanced("()"));
     }
 }
