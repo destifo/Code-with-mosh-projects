@@ -41,5 +41,7 @@ public class App
         System.out.println(stackCheats.reverseString("sweat"));
 
         System.out.println(stackCheats.isBalanced("()"));
+
+        
     }
 }
