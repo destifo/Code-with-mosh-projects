@@ -1,6 +1,7 @@
 package com.destifo;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class ArrayQueue {
 
@@ -35,6 +36,11 @@ public class ArrayQueue {
         if (front >= queue.length) front = 0;
         if (isEmpty()) throw new IllegalStateException();
         queueSize--;
+        if (front == queue.length - 1){
+            int popped = queue[front];
+            front = 0;
+            return popped;
+        }
         return queue[front++];
 
 
@@ -46,7 +52,21 @@ public class ArrayQueue {
     }
 
     public String toString(){
-        var content = Arrays.copyOfRange(this.queue, front, rear + 1);
+        int[] content;
+        if (rear > front)   
+            content = Arrays.copyOfRange(this.queue, front, rear + 1);
+        else{
+            var arr1 = Arrays.copyOfRange(this.queue, front, queueSize);
+            var arr2 = Arrays.copyOfRange(this.queue, 0, rear);
+            int arr1Len = arr1.length;
+            int arr2Len = arr2.length;
+            int[] result = new int[arr1Len + arr2Len];
+
+            System.arraycopy(arr1, 0, result, 0, arr1Len);
+            System.arraycopy(arr2, 0, result, arr1Len, arr2Len);
+            content = result;
+        }
+            
         return Arrays.toString(content);
     }
     
