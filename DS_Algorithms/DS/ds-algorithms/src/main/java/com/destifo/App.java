@@ -11,18 +11,19 @@ public class App
     public static void main( String[] args )
     {
 
-        StackByArray arrayStack = new StackByArray();
+        ArrayQueue queue = new ArrayQueue(3);
 
-        arrayStack.push(3);
-        arrayStack.push(2);
-        arrayStack.push(1);
-        arrayStack.push(5);
-        arrayStack.push(4);
-        arrayStack.push(6);
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue(3);
+       
+        System.out.println(queue.dequeue());
+        System.out.println(queue.dequeue());
+        System.out.println(queue.dequeue());
 
-        System.out.println(arrayStack.pop());
-        System.out.println(arrayStack.peek());
+        queue.enqueue(1);
 
+        System.out.println(queue.toString());
 
     }
 }
