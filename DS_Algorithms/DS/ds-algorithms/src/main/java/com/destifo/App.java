@@ -22,6 +22,8 @@ public class App
         System.out.println(queue.dequeue());
 
         queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue(3);
 
         System.out.println(queue.toString());
 
