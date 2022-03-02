@@ -11,8 +11,8 @@ public class ArrayQueue {
 
     public ArrayQueue(int size){
         this.queue = new int[size];
-        this.front = -1;
-        this.rear = -1;
+        this.front = 0;
+        this.rear = 0;
         this.queueSize = 0;
     }
 
@@ -27,22 +27,17 @@ public class ArrayQueue {
     public void enqueue(int val){
         if (isFull()) throw new IllegalStateException();
         queueSize++;
-        if (front == -1) front++;
-        if (rear >= queue.length - 1) rear = -1;
-        this.queue[++this.rear] = val;
+        this.queue[this.rear] = val;
+        rear = (rear + 1) % queue.length;
     }
 
     public int dequeue(){
-        if (front >= queue.length) front = 0;
         if (isEmpty()) throw new IllegalStateException();
         queueSize--;
-        if (front == queue.length - 1){
-            int popped = queue[front];
-            front = 0;
-            return popped;
-        }
-        return queue[front++];
-
+        int popped = queue[front];
+        queue[front] = 0;
+        front = (front + 1) % queue.length;
+        return popped;
 
     }
 
