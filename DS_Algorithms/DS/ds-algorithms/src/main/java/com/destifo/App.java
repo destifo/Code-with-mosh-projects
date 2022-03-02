@@ -11,7 +11,7 @@ public class App
     public static void main( String[] args )
     {
 
-        StackQueue queue = new StackQueue();
+        QueueWithTwoStacks queue = new QueueWithTwoStacks();
 
         queue.enqueue(1);
         queue.enqueue(2);
