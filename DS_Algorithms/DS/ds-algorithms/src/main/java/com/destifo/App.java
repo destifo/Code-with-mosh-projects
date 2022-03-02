@@ -11,7 +11,7 @@ public class App
     public static void main( String[] args )
     {
 
-        ArrayQueue queue = new ArrayQueue(3);
+        StackQueue queue = new StackQueue();
 
         queue.enqueue(1);
         queue.enqueue(2);
@@ -24,6 +24,7 @@ public class App
         queue.enqueue(1);
         queue.enqueue(2);
         queue.enqueue(3);
+        queue.dequeue();
 
         System.out.println(queue.toString());
 
