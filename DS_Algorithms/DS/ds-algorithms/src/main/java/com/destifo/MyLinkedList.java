@@ -1,6 +1,8 @@
 package com.destifo;
 
-public class LinkedList {
+import com.destifo.Node;
+
+public class MyLinkedList {
     private Node head;
     private Node tail;
     private int length;
@@ -9,7 +11,7 @@ public class LinkedList {
         return length;
     }
 
-    public LinkedList(){};
+    public MyLinkedList(){};
 
     private boolean isEmpty(){
         if (head == null) return true;

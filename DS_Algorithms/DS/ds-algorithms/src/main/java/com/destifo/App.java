@@ -2,6 +2,8 @@ package com.destifo;
 
 import java.util.Arrays;
 
+import com.destifo.Tree.MyTree;
+
 /**
  * Hello world!
  *
@@ -11,22 +13,14 @@ public class App
     public static void main( String[] args )
     {
 
-        ArrayPriorityQueue queue = new ArrayPriorityQueue(3);
+        MyTree tree = new MyTree();
 
-        queue.enqueue(1);
-        queue.enqueue(7);
-        queue.enqueue(3);
-       
-        System.out.println(queue.remove());
-        System.out.println(queue.remove());
-        System.out.println(queue.remove());
+        tree.insert(7);
+        tree.insert(4);
+        tree.insert(5);
+        tree.insert(9);
+        tree.insert(8);
 
-        queue.enqueue(3);
-        queue.enqueue(2);
-        queue.enqueue(3);
-        queue.remove();
-
-        System.out.println(queue.toString());
-
+        System.out.println("Done");
     }
 }
