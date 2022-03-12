@@ -1,0 +1,1 @@
+let isLandscape = (width, height) => (width > height);
