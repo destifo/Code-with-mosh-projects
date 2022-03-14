@@ -4,6 +4,6 @@ let showStars = rows => {
         console.log(pattern);
         pattern += '*';
     }
-}
+};
 
 showStars(5)

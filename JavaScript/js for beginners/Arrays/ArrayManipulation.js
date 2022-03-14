@@ -112,4 +112,14 @@ let mappedItems = nums.map(function(value) {
 });
 const html = "<ul>" +  mappedItems.join('') + '</ul>';
 
-let mappedObj = nums.map(value => ({value}));//when returning an obj in an arrowed functions, use brackets just like ({value}) or the arrow function will inteprate the curly braces as block of code and we will have a non working code.
+let mappedObj = nums.map(value => ({value}));//when returning an obj in an arrowed functions, use brackets just like ({value}) or the arrow function will inteprate the curly braces as block of code and we will have a non working code.{value} is an object here.
+
+
+//Reducing arrays
+const sum = arr1.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue;
+}, 0);
+
+const otherWaySum = arr1.reduce(
+    (accumulator, currentValue) => accumulator + currentValue
+)
