@@ -34,17 +34,16 @@ app.get('/api/courses/:id', (req, res) => {
     let courseId = parseInt(req.params.id);
     let course = courses.find( course => course.id === courseId).name;
 
-    if (!course)    res.status(404).send('The course with the given id was not found.');
+    if (!course)    return res.status(404).send('The course with the given id was not found.');
     res.send(course);
 });
 
 //handling http post 
 app.post('/api/courses', (req, res) => {
     const { error } = validateCourse(req.body);//object ditructring
-    if (error){
-        res.status(400).send(error.details[0].message);
-        return;
-    }
+    if (error)
+        return res.status(400).send(error.details[0].message);
+
 
     const course = {
         id: courses.length + 1,
@@ -58,10 +57,8 @@ app.post('/api/courses', (req, res) => {
 //handling http put requests
 app.put('/api/courses/:id', (req, res) => {
     const { error } = validateCourse(req.body);//object ditructring
-    if (error){
-        res.status(400).send(error.details[0].message);
-        return;
-    }
+    if (error)
+        return res.status(400).send(error.details[0].message);
 
     const courseId = parseInt(req.params.id);
     const course = courses.find(course => course.id === courseId);
@@ -87,6 +84,27 @@ function validateCourse(course){
 
     return Joi.validate(course, schema);
 }
+
+app.delete('/api/courses/:id', (req, res) => {
+    const courseId = parseInt(req.params.id);
+    let deletedCourse;
+    let courseIndex;
+    for (let i in courses){
+        const course = courses[i];
+        if (course.id === courseId){
+            courseIndex = i;
+            deletedCourse = courses[courseIndex];
+            break; 
+        }
+    }
+
+    if (!deletedCourse)
+        return res.status(404).send("Course not found");
+    
+    courses.splice(courseIndex, 1);
+    res.send(deletedCourse);
+});
+
 
 const port = process.env.PORT || 8001;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
