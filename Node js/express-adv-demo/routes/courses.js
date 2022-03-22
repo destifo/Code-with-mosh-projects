@@ -1,8 +1,7 @@
 const Joi = require('joi');//input validation
 const Express = require('express');
-const app = Express();
+const router = Express.Router();
 
-app.use(Express.json());
 
 const courses = [        
     {
@@ -19,16 +18,12 @@ const courses = [
     }
 ];
 
-app.get('/', (req, res) => {
-    res.send('Hello World');
-});
-
-app.get('/api/courses', (req, res) => {
+router.get('/', (req, res) => {
     res.send(courses);
 });
 
 //handling http get requests
-app.get('/api/courses/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     //res.send(req.query);
     //res.send(req.params);//won't be executed
     let courseId = parseInt(req.params.id);
@@ -39,7 +34,7 @@ app.get('/api/courses/:id', (req, res) => {
 });
 
 //handling http post 
-app.post('/api/courses', (req, res) => {
+router.post('/', (req, res) => {
     const { error } = validateCourse(req.body);//object ditructring
     if (error)
         return res.status(400).send(error.details[0].message);
@@ -55,7 +50,7 @@ app.post('/api/courses', (req, res) => {
 });
 
 //handling http put requests
-app.put('/api/courses/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const { error } = validateCourse(req.body);//object ditructring
     if (error)
         return res.status(400).send(error.details[0].message);
@@ -84,7 +79,7 @@ function validateCourse(course){
     return Joi.validate(course, schema);
 }
 
-app.delete('/api/courses/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     const courseId = parseInt(req.params.id);
     let deletedCourse;
     let courseIndex;
@@ -104,6 +99,4 @@ app.delete('/api/courses/:id', (req, res) => {
     res.send(deletedCourse);
 });
 
-
-const port = process.env.PORT || 8001;
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+module.exports = router;
