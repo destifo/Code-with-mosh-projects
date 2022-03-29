@@ -20,7 +20,9 @@ public class App
         tree.insert(5);
         tree.insert(9);
         tree.insert(8);
+        System.out.println(tree.find(9));
 
+        tree.traversePostOrder();
         System.out.println("Done");
     }
 }

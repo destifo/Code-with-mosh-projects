@@ -1,8 +1,13 @@
 async function displayCommits(){
-    const user = await getUser(1);
-    const repos = await getRepos(user.username);
-    const commits = await getCommits(repos[0]);
-    console.log(commits);
+    try{
+        const user = await getUser(1);
+        const repos = await getRepos(user.username);
+        const commits = await getCommits(repos[0]);
+        console.log(commits);
+    }
+    catch (err){
+        console.log("Error:", err);
+    }
 }
 
 displayCommits();
