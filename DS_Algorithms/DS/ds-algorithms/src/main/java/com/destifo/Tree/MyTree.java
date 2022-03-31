@@ -195,5 +195,12 @@ public class MyTree {
         
     }
 
+    public void traverseLevelOrder() {
+        for (int i = 0; i <= height(); i++){
+            System.out.print("Nodes at level " + i + ": ");
+            System.out.println(nodesAtKdistance(i));
+        }
+    }
+
 }
 

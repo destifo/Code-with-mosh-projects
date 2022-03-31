@@ -31,6 +31,8 @@ public class App
         System.out.println("equal ?: " + tree.isBinaryTree());
         System.out.println("at k distance ?: " + tree.nodesAtKdistance(1));
 
+        tree.traverseLevelOrder();
+
         tree.traverseInOrder();
         System.out.println("Done");
     }
