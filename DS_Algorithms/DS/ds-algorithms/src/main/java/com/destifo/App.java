@@ -20,9 +20,19 @@ public class App
         tree.insert(5);
         tree.insert(9);
         tree.insert(8);
-        System.out.println(tree.find(9));
 
-        tree.traversePostOrder();
+        MyTree tree2 = new MyTree();
+        tree2.insert(7);
+        tree2.insert(4);
+        tree2.insert(5);
+        tree2.insert(9);
+        tree2.insert(8);
+        // tree2.insert(9);
+        
+        tree.swap();
+        System.out.println("equal ?: " + tree.isBinaryTree());
+
+        tree.traverseInOrder();
         System.out.println("Done");
     }
 }
