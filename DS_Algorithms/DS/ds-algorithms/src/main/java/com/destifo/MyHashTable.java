@@ -1,8 +1,5 @@
 package com.destifo;
-
-import java.util.Hashtable;
 import java.util.LinkedList;
-import java.util.List;
 
 public class MyHashTable {
     private LinkedList<KeyValuePair>[] hashTable = new LinkedList[7];

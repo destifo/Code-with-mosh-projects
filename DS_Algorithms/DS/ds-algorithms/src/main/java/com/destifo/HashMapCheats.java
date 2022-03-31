@@ -2,7 +2,6 @@ package com.destifo;
 
 import java.util.HashMap;
 
-import javax.naming.NameNotFoundException;
 
 public class HashMapCheats {
     public char findFirstNonRepeated(String input){
