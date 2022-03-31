@@ -1,5 +1,8 @@
 package com.destifo.Tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyTree {
 
     private Node root;
@@ -171,6 +174,25 @@ public class MyTree {
         Node temp = root.getLeftChild();
         root.setLeftChild(root.getRightChild());
         root.setRightChild(temp);
+    }
+
+    public List<Integer> nodesAtKdistance(int k) {
+        List<Integer> ans = new ArrayList<>();
+        nodesAtKdistance(root, k, ans);
+        return ans;
+    }
+
+    private void nodesAtKdistance(Node root, int distance, List<Integer> ans) {
+        if (root == null)
+            return;        
+        if (distance == 0){
+            ans.add(root.value);
+            return;
+        }
+        
+        nodesAtKdistance(root.getLeftChild(), distance - 1, ans);
+        nodesAtKdistance(root.getRightChild(), distance - 1, ans);
+        
     }
 
 }

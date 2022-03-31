@@ -28,8 +28,8 @@ public class App
         tree2.insert(8);
         // tree2.insert(9);
         
-        tree.swap();
         System.out.println("equal ?: " + tree.isBinaryTree());
+        System.out.println("at k distance ?: " + tree.nodesAtKdistance(1));
 
         tree.traverseInOrder();
         System.out.println("Done");
