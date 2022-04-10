@@ -1,9 +1,13 @@
 package com.destifo.Graph;
 
+import java.security.KeyStore.Entry;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 
 public class Graph {
 
@@ -71,5 +75,72 @@ public class Graph {
             return;
 
         neighbours.get(fromNode).remove(toNode);
+    }
+
+    public void traverseDepthFirst() {
+        Set<String> isVisited = new HashSet<>();
+        for (var label: nodes.keySet()){
+            if (!isVisited.contains(label)){
+                System.out.println(label);
+                isVisited.add(label);
+            }
+            traverseDepthFirst(nodes.get(label), isVisited);
+        }
+         
+    }
+
+    private void traverseDepthFirst(Node node, Set<String> isVisited) {
+        for (Node child: neighbours.get(node)){
+            if (!isVisited.contains(child.label)){
+                isVisited.add(child.label);
+                System.out.println(child.label);
+                traverseDepthFirst(child, isVisited);
+            }
+
+        }
+    }
+
+    public void traverseDepthFirstFromRoot(String root) {
+        Node node = nodes.get(root);
+        if (node == null)
+            return;
+
+        traverseDepthFirstFromRoot(node, new HashSet<>());
+    }
+
+    private void traverseDepthFirstFromRoot(Node node, Set<String> isVisited) {
+        System.out.println(node.label);
+        isVisited.add(node.label);
+
+        for (var neigbour: neighbours.get(node))
+            if (!isVisited.contains(neigbour.label))
+                traverseDepthFirstFromRoot(neigbour, isVisited);
+    }
+
+    public void traverseDepthFirstIteratively(String root){
+        Node node = nodes.get(root);
+        if (node == null)
+            return;
+
+        Stack<Node> stack = new Stack<>();
+        Set<String> visited = new HashSet<>();
+
+        stack.push(node);
+
+        while (!stack.isEmpty()){
+            Node curr = stack.pop();
+            if (!visited.contains(curr.label)){
+                visited.add(curr.label);
+                System.out.println(curr.label);
+            }
+
+            for (var neighbour: neighbours.get(curr)){
+                if (!visited.contains(neighbour.label)){
+                    stack.push(neighbour);
+                }
+            }
+        }
+
+
     }
 }

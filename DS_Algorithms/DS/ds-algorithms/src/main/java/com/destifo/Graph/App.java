@@ -8,13 +8,13 @@ public class App {
         graph.addNode("b");
         graph.addNode("c");
 
-        graph.addEdge("a", "b");
+        // graph.addEdge("a", "b");
         graph.addEdge("a", "c");
-        graph.removeNode("a");
-        graph.addNode("a");
+        // graph.addNode("a");
         graph.addEdge("c", "b");
 
-        graph.print();
+        // graph.print();
+        graph.traverseDepthFirstIteratively("a");
 
     }
     
