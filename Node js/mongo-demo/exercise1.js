@@ -25,7 +25,7 @@ async function getCoursesByFilter() {
 }
 
 async function run() {
-    const courses = await getCoursesByFilter2();
+    const courses = await getCoursesByFilter3();
     console.log(courses);
 }
 
@@ -35,6 +35,15 @@ async function getCoursesByFilter2() {
         .sort({price: -1})
         .select({name: 1, author: 1});
 
+    return courses;
+}
+
+async function getCoursesByFilter3() {
+    const courses = await Course
+        .find({isPublished: true})
+        .or([{name: /.*by.*/i}, {price: { $gte: 15}}])
+        .select({name: 1});
+    
     return courses;
 }
 
