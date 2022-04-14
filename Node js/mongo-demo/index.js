@@ -52,5 +52,24 @@ async function getCoursesWithLogcalOperators() {
         .and([]);
 }
 
+async function getCoursesWithRegex() {
+    const pageNumber = 2;
+    const pageSize = 10;
+
+    const courses = await Course
+        // starts with Mosh
+        .find({author: /^Mosh/ })
+        // ends with hamedani
+        .find({author: /hamedani$/ })
+        //contains mosh anywhere, i for the case sensetive
+        .find({author: /.*mosh*./i })
+        //count() returns the number of documents that was found by the search
+        .count()
+        //for pagination we can use skip() and limit() together, to skip previous page content
+        .skip((pageNumber - 1) * pageSize)
+        .limit(pageSize)
+        ;
+}
+
 getCourses();
 
