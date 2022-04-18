@@ -12,7 +12,10 @@ const courseSchema = mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ['web', 'mobile', 'network']
+        enum: ['web', 'mobile', 'network'],
+        lowercase: true,
+        //uppercase: true,
+        trim: true,
     }, 
     author: String,
     tags: {
@@ -28,7 +31,12 @@ const courseSchema = mongoose.Schema({
             message: "A course should have at least one tag"
         }
     },
-    price: { type: Number, required: function () {return this.isPublished;} },
+    price: { type: Number, required: function () {return this.isPublished;},
+    min: 10,
+    max: 200,
+    get: v => Math.round(v),
+    set: v => Math.round(v),
+},
     isPublished: Boolean, 
     date: { type: Date, default: Date.now}
 });
