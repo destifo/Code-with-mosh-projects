@@ -4,15 +4,39 @@ const mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/playground").then(() => console.log("Connected to MongoDb...")).catch(err => console.log("Error found", err));
 
 const courseSchema = mongoose.Schema({
-    name: String, 
+    name: {
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 10,
+    },
+    category: {
+        type: String,
+        enum: ['web', 'mobile', 'network']
+    }, 
     author: String,
     tags: [String],
-    price: Number,
-    ispublished: Boolean, 
+    price: { type: Number, required: function () {return this.isPublished;} },
+    isPublished: Boolean, 
     date: { type: Date, default: Date.now}
 });
 
 const Course = mongoose.model('courses', courseSchema);
+
+async function createCourse() {
+    const course = new Course({
+        isPublished: true,
+        category: 'node'
+    });
+    try {
+        const result = await course.save();
+        console.log(result);
+    }
+    catch (ex){
+        console.log(ex.message);
+    }
+}
+
 
 // Approach: Query first
 async function updateCourse(id) {
@@ -60,4 +84,4 @@ async function removeCourse(id) {
     console.log(result);    
 }
 
-updateCourse2("62571e911d6da73878b60b18");
+createCourse();
