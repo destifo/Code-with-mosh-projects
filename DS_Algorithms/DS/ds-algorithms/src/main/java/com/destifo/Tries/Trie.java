@@ -37,10 +37,26 @@ public class Trie {
     private TrieNode root = new TrieNode(' ');
 
     public void buildTrieFromList(String[] words) {
-
         for (String word : words){
             insert(word);
         }
+    }
+
+    public boolean contains(String word) {
+        if (word == null)
+            return false;
+
+        TrieNode curr = root;
+        for (char ch: word.toCharArray()){
+            if (!curr.hasChild(ch))
+                return false;
+            curr = curr.getChild(ch);
+        }
+        
+        if (!curr.isEndOfword)
+            return false;
+            
+        return true;
     }
 
 
