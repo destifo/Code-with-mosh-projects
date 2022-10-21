@@ -17,26 +17,26 @@ public class Heap {
     }
 
     private boolean hasLeft(int index) {
-        return getLeft(index) < length();
+        return getLeftIndex(index) < length();
     }
 
     private boolean hasRight(int index) {
-        return getRight(index) < length();
+        return getRightIndex(index) < length();
     }
 
     private boolean hasChild(int index) {
         return hasLeft(index) || hasRight(index);
     }
 
-    private int getParent(int index){
+    private int getParentIndex(int index){
         return (index - 1) / 2;
     }
 
-    private int getLeft(int index){
+    private int getLeftIndex(int index){
         return (index * 2) + 1;
     }
 
-    private int getRight(int index) {
+    private int getRightIndex(int index) {
         return (index * 2) + 2;
     }
 
@@ -46,11 +46,17 @@ public class Heap {
         nums.set(index2, temp);
     }
 
+    private void swap1(int index1, int index2, int[] nums){
+        int temp = nums[index1];
+        nums[index1] = nums[index2];
+        nums[index2] = temp;
+    }
+
     private void heapifyUp(int index) {
         if (!hasParent(index))
             return;
 
-        int parent = getParent(index);
+        int parent = getParentIndex(index);
         if (nums.get(parent) >= nums.get(index))
             return;
 
@@ -62,18 +68,22 @@ public class Heap {
         if (!hasChild(index))
             return;
 
-        int leftVal = nums.get(getLeft(index));
+        int leftVal = nums.get(getLeftIndex(index));
         int rightVal = Integer.MIN_VALUE;
         if (hasRight(index))
-            rightVal = nums.get(getRight(index));
+            rightVal = nums.get(getRightIndex(index));
+
+        int maxChild = Math.max(leftVal, rightVal);
+        if (maxChild <= nums.get(index))
+            return;
         
         if (leftVal >= rightVal){
-            swap(getLeft(index), index);
-            heapifyDown(getLeft(index));
+            swap(getLeftIndex(index), index);
+            heapifyDown(getLeftIndex(index));
         }
         else{
-            swap(getRight(index), index);
-            heapifyDown(index);
+            swap(getRightIndex(index), index);
+            heapifyDown(getRightIndex(index));
         }
     }
 
@@ -84,9 +94,51 @@ public class Heap {
             heapifyUp(index);
     }
 
-    public void remove() {
+    private boolean isEmpty() {
+        return length() == 0;
+    }
+
+    public int remove() {
+        if (isEmpty())
+            return -1;
+        int root = nums.get(0);
+        if (length() == 1){
+            nums.remove(0);
+            return root;
+        }
+
         swap(0, length()-1);
+        nums.remove(length()-1);
         heapifyDown(0);
+        return root;
+    }
+
+    private void heapifyDown(int index, int[] nums){
+        if (!hasChild(index))
+            return;
+
+        int leftVal = nums[getLeftIndex(index)];
+        int rightVal = Integer.MIN_VALUE;
+        if (hasRight(index))
+            rightVal = nums[getRightIndex(index)];
+
+        int maxChild = Math.max(leftVal, rightVal);
+        if (maxChild <= nums[index])
+            return;
+        
+        if (leftVal >= rightVal){
+            swap1(getLeftIndex(index), index, nums);
+            heapifyDown(getLeftIndex(index), nums);
+        }
+        else{
+            swap1(getRightIndex(index), index, nums);
+            heapifyDown(getRightIndex(index), nums);
+        }
+    }
+
+    public void heapify(int[] nums) {
+        for (int i = 0; i < nums.length; i++)
+            heapifyDown(i, nums);
     }
 
 }

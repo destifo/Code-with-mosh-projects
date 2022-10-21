@@ -1,6 +1,7 @@
 package com.destifo;
 
 
+import com.destifo.AVLTrees.AVLTree;
 import com.destifo.Tree.MyTree;
 
 /**
@@ -12,28 +13,10 @@ public class App
     public static void main( String[] args )
     {
 
-        MyTree tree = new MyTree();
-
-        tree.insert(7);
-        tree.insert(4);
-        tree.insert(5);
-        tree.insert(9);
-        tree.insert(8);
-
-        MyTree tree2 = new MyTree();
-        tree2.insert(7);
-        tree2.insert(4);
-        tree2.insert(5);
-        tree2.insert(9);
-        tree2.insert(8);
-        // tree2.insert(9);
-        
-        System.out.println("equal ?: " + tree.isBinaryTree());
-        System.out.println("at k distance ?: " + tree.nodesAtKdistance(1));
-
-        tree.traverseLevelOrder();
-
-        tree.traverseInOrder();
-        System.out.println("Done");
+        AVLTree avlTree = new AVLTree();
+        avlTree.insert(20);
+        avlTree.insert(10);
+        avlTree.insert(15);
+        System.out.println(" ");
     }
 }
